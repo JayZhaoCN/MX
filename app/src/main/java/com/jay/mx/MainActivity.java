@@ -1,9 +1,10 @@
 package com.jay.mx;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.jay.mx.base.BaseTitleActivity;
+
+public class MainActivity extends BaseTitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,4 +3,184 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#66ffffff</color>
+    <color name="white_gray">#33ffffff</color>
+    <color name="titlebar_bg_color">#00A3C0</color>
+    <color name="titlebar_bg_color_dark">#8800A3C0</color>
+    <color name="window_bg">#f7f7f7</color>
+    <color name="transparency">#00000000</color>
+    <color name="black">#ff000000</color>
+    <!-- title bar color -->
+    <color name="status_view_default_color">#00A3C0</color>
+    <color name="step_bg_light">#FF10A9C4</color>
+    <color name="step_bg_drak">#FF00A3C0</color>
+    <color name="sleep_bg_light">#FF555EBA</color>
+    <color name="sleep_bg_dark">#FF5059B0</color>
+    <color name="heart_rate_dark">#FFDF5647</color>
+    <color name="heart_rate_light">#FFE25D4D</color>
+    <color name="shoes_dark">#FF22ADAD</color>
+    <color name="shoes_light">#FF25B5B5</color>
+    <color name="null_value_color">#B3B3B3</color>
+    <color name="share_bg">#FF3C444F</color>
+
+
+    <color name="item_title">#B3000000</color>
+    <color name="item_light_title">#FFFF7200</color>
+
+    <!--startup-->
+    <color name="bg_color_white">#ffffff</color>
+    <color name="font_color_c7_v2">#008ecd</color>
+    <color name="font_color_c8">#ffffff</color>
+
+    <!--login activity-->
+    <color name="status_view_color_loginactivity">#FFF8F8F8</color>
+    <color name="user_agreement_text">#FF1674E9</color>
+
+    <color name="bg_color_grey">#3c444f</color>
+    <color name="title_color">#fff</color>
+    <color name="normal">#efeff0</color>
+    <color name="content_color_darker">#80ffffff</color>
+    <color name="content_inner_color">#0cffffff</color>
+
+    <color name="bg_mode_sleep">#2e2e73</color>
+    <color name="bg_mode_step">#008ed0</color>
+    <color name="bg_mode_weight">#00a388</color>
+    <color name="bg_color_blue_dark">#1879cb</color>
+    <color name="bg_color_red">#c84d67</color>
+    <color name="bg_color_red_dark">#993b57</color>
+    <color name="disable_text_color_dark">#33ffffff</color>
+
+    <color name="split_color">#FFe5e5e5</color>
+    <color name="main_ui_title_color">#555555</color>
+    <color name="main_ui_content_color">#80000000</color>
+    <color name="item_bg_pressed">#05000000</color>
+    <color name="device_setting_item_color">#B3000000</color>
+    <color name="black_10_percent">#1A000000</color>
+    <color name="black_40_percent">#66000000</color>
+    <color name="black_50_percent">#8F000000</color>
+    <color name="black_20_percent">#33000000</color>
+    <color name="black_70_percent">#B2000000</color>
+    <color name="black_60_percent">#99000000</color>
+    <color name="black_80_percent">#CC000000</color>
+    <color name="selected_origin">#FFFF7200</color>
+    <color name="stroke_line">#4D000000</color>
+
+    <!-- smart play color -->
+    <color name="smartdevice_color">@color/blue_dark</color>
+    <color name="status_color">@color/blue_dark</color>
+    <color name="blue_light">#FF10A9C4</color>
+    <color name="blue_dark">#FF00A3C0</color>
+    <color name="smartdevice_bg_color">#10A9C4</color>
+    <color name="smartdevice_bg_color_disable_drak">#FF38404A</color>
+    <color name="smartdevice_bg_color_disable">#FF3C444F</color>
+    <color name="phone_alarm_alert_bg_color">#10A9C4</color>
+    <color name="phone_alarm_alert_title_color">#00A3C0</color>
+
+    <!-- smart play color -->
+
+    <!--person info-->
+    <color name="personinfo_default_color">#00A3C0</color>
+    <color name="personinfo_shadow">#ffffff</color>
+    <color name="personinfo_title_txt_color">#E6FFFFFF</color>
+    <color name="personinfo_btn_txt_color">#99FFFFFF</color>
+    <color name="personinfo_bg">#FFF8F8F8</color>
+    <color name="personinfo_item_key_text_color">#B3000000</color>
+    <color name="personinfo_item_value_text_color">#66000000</color>
+    <color name="personinfo_gender_selected">#FFFF7200</color>
+    <color name="personinfo_color_yellow">#FFFF6A0E</color>
+
+    <color name="font_color_c8_transparent">#7fffffff</color>
+    <color name="font_color_c4">#dcdcdc</color>
+    <color name="gray_bg">#3c444f</color>
+    <color name="shoes_calibrate_btn_border_color">#40FFFFFF</color>
+    <color name="bg_round_item_stroke">#4D000000</color>
+
+    <color name="change_sport_goal_picker_center">#FF00A3C0</color>
+    <color name="change_sport_goal_picker_normal">#1F000000</color>
+    <color name="change_sport_goal_picker_normal_light">#14000000</color>
+    <color name="change_sport_goal_bg">#FFF8F8F8</color>
+    <color name="change_sport_goal_confirm_txt">#99000000</color>
+    <color name="change_sport_goal_confirm_solid">#FFFFFFFF</color>
+    <color name="change_sport_goal_confirm_stroke">#FFC6C6C6</color>
+    <color name="change_sport_goal_mask">#aaF8F8F8</color>
+    <color name="change_sport_goal_unconnect_title_bg">#FF38404A</color>
+    <color name="change_sport_goal_divide">#33000000</color>
+
+    <!--person info setting-->
+    <color name="personinfo_set_gender_txt_enable">#CCFFFFFF</color>
+    <color name="personinfo_set_gender_txt_disable">#80FFFFFF</color>
+
+    <!-- device bind-->
+    <color name="device_mili_bg">#FF10A9C4</color>
+    <color name="device_shoes_bg">#FF25B5B5</color>
+    <color name="device_weight_bg">#FF17B56C</color>
+    <color name="device_mili_hr_bg">#FFF86F53</color>
+    <color name="device_title_color">#E6FFFFFF</color>
+    <color name="device_tips_color">#8CFFFFFF</color>
+    <color name="bg_color_steps_gray">#FF728D98</color>
+    <color name="step_text">#8F323232</color>
+    <color name="bg_color_steps">#FF3A9349</color>
+    <color name="shoes_calibrate_count_color">#99000000</color>
+    <!-- device bind-->
+    <color name="bg_weight_title_color">#12AC65</color>
+    <color name="white_20_percent">#33FFFFFF</color>
+    <color name="white_40_percent">#66FFFFFF</color>
+    <color name="white_70_percent">#B3FFFFFF</color>
+    <color name="white_80_percent">#CCFFFFFF</color>
+    <color name="white_50_percent">#80FFFFFF</color>
+    <color name="black_5_percent">#12000000</color>
+    <color name="white_55_percent">#8cffffff</color><!--50%-->
+    <color name="white_90_percent">#E6FFFFFF</color>
+    <color name="white_60_percent">#99FFFFFF</color>
+    <color name="white_100_percent">#FFFFFF</color>
+    <!-- homeview fail color -->
+    <color name="fail_connect_bg">#3C444F</color>
+    <color name="succ_connect_bg">#10A9C4</color>
+    <color name="succ_connect_scale_bg">#17B56C</color>
+    <color name="succ_connect_scale_head_bg">#12AC65</color>
+    <color name="rippelColor">#3c444f</color>
+    <color name="weight_bg">#17B56C</color>
+
+    <!-- Relation -->
+    <color name="font_color_c1">#565656</color>
+    <color name="font_color_c2">#959595</color>
+    <color name="font_color_c3">#bababa</color>
+    <color name="font_color_c5">#f8f8f8</color>
+    <color name="font_color_c6">#f3664a</color>
+    <color name="font_color_c7">#2499c2</color>
+    <color name="menu_color">#40000000</color>
+    <!--FF 256表示完全不透明 00 0表示完全透明-->
+    <color name="font_color_c9">#FF000000</color>
+    <color name="font_color_c10">#66000000</color>
+    <color name="line_background">#33000000</color>
+    <color name="care_button_text_color">#CCFFFFFF</color>
+    <color name="agree_text_color">#80000000</color>
+    <color name="cancel_confirm">#FFF8F8F8</color>
+    <color name="font_color_c11">#B3000000</color>
+    <color name="sleep_bg">#FF6672D0</color>
+    <color name="fragment_color">#CC00A3C0</color>
+    <color name="fragment_divider_color">#4DFFFFFF</color>
+    <color name="fragment_text_color">#CCFFFFFF</color>
+    <!-- Relation -->
+
+    <!--CropImageActivity-->
+    <color name="crop_image_title">#0d0d0d</color>
+    <color name="delete_disable_tv_color">#26000000</color>
+
+    <color name="web_activity_progress_bar">#7bcddb</color>
+
+    <color name="light_color">#2f91ce</color>
+    <color name="normal_color">#55aa2f</color>
+    <color name="heavy_color">#f7a905</color>
+    <color name="fat_color">#f37c2a</color>
+    <color name="very_fat_color">#ed4f4f</color>
+
+    <!--PieChart-->
+    <color name="seafoam">#ffc6f9e5</color>
+    <color name="chartreuse">#ffb6e9b5</color>
+    <color name="emerald">#ffa6d9b5</color>
+    <color name="bluegrass">#ff96c9b5</color>
+    <color name="turquoise">#ff86b9b5</color>
+    <color name="slate">#ff76a9b5</color>
+
 </resources>

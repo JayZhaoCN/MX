@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/title"
+    android:background="@color/titlebar_bg_color"
+    >
+
+    <View
+        android:id="@+id/status_view"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/titlebar_bg_color"
+        />
+
+    <RelativeLayout
+        android:layout_below="@id/status_view"
+        android:layout_width="match_parent"
+        android:id="@+id/title_container"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/titlebar_bg_color">
+
+
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:background="@drawable/title_back_icon"
+            android:layout_alignParentLeft="true"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/left"/>
+
+        <TextView
+            android:textColor="@color/white_80_percent"
+            android:id="@+id/title_text"
+            android:layout_centerInParent="true"
+            android:text="MyApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:paddingLeft="3dp"
+            android:hint="输入网址"
+            android:textSize="14sp"
+            android:background="@color/white_55_percent"
+            android:id="@+id/edit_text"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_width="260dp"
+            android:layout_height="30dp" />
+
+        <Button
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:background="@drawable/btn_more_normal"
+            android:layout_alignParentRight="true"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/right"/>
+
+        <Button
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:background="@drawable/icon_goto"
+            android:layout_alignParentRight="true"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/search_button"/>
+    </RelativeLayout>
+
+</RelativeLayout>
