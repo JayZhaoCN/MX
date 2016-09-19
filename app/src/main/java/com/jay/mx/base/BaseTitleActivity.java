@@ -2,6 +2,12 @@ package com.jay.mx.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -124,10 +130,30 @@ public class BaseTitleActivity extends FragmentActivity {
                 finish();
             }
         });
+
         mRightButton = (Button) findViewById(R.id.right);
+        setRightButtonBackground();
+
         mTitleParent = (ViewGroup) findViewById(R.id.title_container);
         mStatusView = findViewById(R.id.status_view);
         mStatusView.getLayoutParams().height = getStatusBarHeight();
+    }
+
+    /**
+     * 设置右边Button的背景图片
+     */
+    private void setRightButtonBackground() {
+        //x方向上翻转一张图片
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.title_back_icon);
+        Bitmap bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(), bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap2);
+        Matrix matrix = canvas.getMatrix();
+        matrix.setScale(-1, 1);
+        matrix.postTranslate(bitmap1.getWidth(), 0);
+        canvas.drawBitmap(bitmap1, matrix, null);
+        //将Bitmap转换成Drawable
+        Drawable drawable =new BitmapDrawable(getResources(), bitmap2);
+        mRightButton.setBackground(drawable);
     }
 
     /**
@@ -182,8 +208,8 @@ public class BaseTitleActivity extends FragmentActivity {
 
     /**
      * 需要注意的是，子类在继承时。该方法需要在super.onCreate()方法之后调用，否则颜色的设置可能不起作用
-     * @param style
-     * @param color
+     * @param style 风格
+     * @param color 颜色
      */
     public void setStyle(STYLE style, int color) {
         setStyle(style);
@@ -247,7 +273,7 @@ public class BaseTitleActivity extends FragmentActivity {
 
     private void updateView() {
         if(mContentView != null && mStyle == STYLE.FULL_SCREEN) {
-            /**
+            /*
              Log.e(TAG, "mContentView is not null");
              直接从mContentView中拿到的LayoutParams似乎是NULL，具体为什么不知道。
              mContentView.getLayoutParams();  //the value is NULL
@@ -258,8 +284,7 @@ public class BaseTitleActivity extends FragmentActivity {
                         (FrameLayout.LayoutParams) mContentParent.getChildAt(1).getLayoutParams();
                 params.topMargin = 0;
                 mContentView.setLayoutParams(params);
-            } else
-                return;
+            }
         }
     }
 
@@ -276,7 +301,7 @@ public class BaseTitleActivity extends FragmentActivity {
     public static boolean setMiuiStatusBarDarkMode(Activity activity, boolean darkmode) {
         Class<? extends Window> clazz = activity.getWindow().getClass();
         try {
-            int darkModeFlag = 0;
+            int darkModeFlag;
             Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
             Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
             darkModeFlag = field.getInt(layoutParams);

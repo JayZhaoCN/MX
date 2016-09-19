@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MX</string>
+    <string name="my_app">MyApp</string>
+    <string name="input_url">输入网址</string>
 </resources>
