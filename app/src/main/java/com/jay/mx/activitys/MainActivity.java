@@ -42,6 +42,17 @@ public class MainActivity extends BaseTitleActivity {
         //很简单，把这个局部变量定义为final即可。
         //总结:核心的问题是:怎么才能使得:访问"复制品"与访问真正的原始的局部变量,其语义效果是一样的呢?
 
+
+        //Java中的参数传递？
+        //以前学C++,知道：C++中有两种参数传递方式：
+        //按值传递和按引用传递，解释下这两种传值方式：
+        //按值传递：只是简单地将参数的值传递过来，传递的是值的拷贝，之后这个拷贝过来的值如何变化，对原来的值没有任何影响
+        //按引用传递：传递的是引用的地址，传递到方法中的值的修改也会导致原来值的变化
+
+        //Java中都是按值传递，即传递的都是值的拷贝。
+        //对于基本类型来说，很好理解，不管传进去的值如何变化，原先的值不会变，因为传递的是拷贝嘛。
+        //但是对于引用类型，就会有变化。对于引用类型来说，传递的拷贝其实这个变量的地址，所以效果上和C++中的按引用传递是一样的
+
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, list);
         adapter.setOnItemClickListener(new MyRecyclerAdapter.OnItemClickListener() {
             @Override
