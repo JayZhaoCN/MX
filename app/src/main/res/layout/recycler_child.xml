@@ -7,9 +7,18 @@
     android:layout_margin="8dp"
     android:id="@+id/cv_item"
     card_view:cardCornerRadius="4dp">
+    <!--
+        无法设置CardView的点击事件，
+        设置CardView的背景点击效果也不可以，
+        即使为CardView设置了android:clickable="true"
+        依然没有点击效果。
+        难道CardView就是不支持点击的？
+        先留个坑。
+        -->
     <TextView
+        android:background="@drawable/card_text_background"
         android:clickable="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:id="@+id/child_text"
