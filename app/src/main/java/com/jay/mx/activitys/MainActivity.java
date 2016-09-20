@@ -11,6 +11,7 @@ import com.jay.mx.adapters.MyRecyclerAdapter;
 import com.jay.mx.base.BaseTitleActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends BaseTitleActivity {
@@ -24,20 +25,19 @@ public class MainActivity extends BaseTitleActivity {
     }
 
     private void init() {
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        final List<String> mList = new ArrayList<>();
-        mList.add("Change Animation");
-        mList.add("Loading Dialog");
-        mList.add("Full Screen Style");
-        mList.add("TableLayout");
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, mList);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        //如何将一个数组转化为List，下面给出了方法：
+        final List<String> list = Arrays.asList(getResources().getStringArray(R.array.function_1));
+
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, list);
         adapter.setOnItemClickListener(new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.i(TAG, mList.get(position) + " clicked!");
+                Log.i(TAG, list.get(position) + " clicked!");
             }
         });
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
