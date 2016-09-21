@@ -58,6 +58,8 @@ public class MainActivity extends BaseTitleActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Log.i(TAG, list.get(position) + " clicked!");
+                //在这里添加Item 点击事件
+
             }
         });
         recyclerView.setAdapter(adapter);
