@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -286,10 +287,8 @@ public class BaseTitleActivity extends FragmentActivity {
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         mContentView = view;
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) params;
-
         int titleHeight = this.getResources().getDimensionPixelSize(R.dimen.title_height);
-
-        layoutParams.topMargin = titleHeight + Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? getStatusBarHeight() : 0;
+        layoutParams.topMargin = titleHeight + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? getStatusBarHeight() : 0);
 
         if(mContentParent.getChildCount() > 1) {
             mContentParent.removeViewAt(1);
