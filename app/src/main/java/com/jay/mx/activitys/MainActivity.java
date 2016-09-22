@@ -1,10 +1,16 @@
 package com.jay.mx.activitys;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.jay.mx.R;
 import com.jay.mx.adapters.MyRecyclerAdapter;
@@ -17,11 +23,61 @@ import java.util.List;
 public class MainActivity extends BaseTitleActivity {
     private static final String TAG = "MainActivity";
 
+    private ValueAnimator mColorAnimator = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        initAnimator();
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void initAnimator() {
+        if(mColorAnimator == null) {
+            //关于Color的动画，调用ValueAnimator.ofArgb(int ...values)
+            mColorAnimator = ValueAnimator.ofArgb
+                    (ContextCompat.getColor(this, R.color.bg_color_red),
+                            ContextCompat.getColor(this, R.color.colorPrimary), ContextCompat.getColor(this, R.color.blue_light));
+            //如果调用了ofArgb方法，就不用再去设置Evaluator了
+            //mColorAnimator.setEvaluator(new ArgbEvaluator());
+            mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                int currentColor;
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    currentColor = (int) animation.getAnimatedValue();
+                    setColorValue(currentColor);
+                }
+            });
+            mColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            mColorAnimator.setDuration(5000);
+            mColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            mColorAnimator.setInterpolator(new LinearInterpolator());
+            mColorAnimator.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //在Activity的onDestroy方法中取消Animation，防止出现内存泄漏
+        if(mColorAnimator != null) {
+            if(mColorAnimator.isRunning()) {
+                mColorAnimator.cancel();
+                mColorAnimator = null;
+            }
+        }
+        //关于ValueAnimator：
+        //cancel()和end()方法的区别：
+        //cancel()调用后，动画会停止运行，且动画不会跳到最终值。（）比如一个从0到40的动画。在动画执行到20时，调用cancel()，则动画就会停在20而不会调到40）
+        //end()调用后，动画也会停止运行，且动画会跳到最终值。
+        //调用cancel()会触发AnimatorListener的onAnimationCancel()的执行，然后触发onAnimationEnd()方法的执行。
+        //调用end()会直接触发onAnimationEnd()方法的执行。
+
+        //ValueAnimator.isRunning()和ValueAnimator.isStarted()方法的区别：
+        //调用了ValueAnimator.start()方法后，isStarted()返回的就是true。而isRunning()并不一定会返回true，因为可能会调用setStartDelay()设置了启动延迟。
+        //只有当动画真正启动后，isRunning()才会返回true
     }
 
     private void init() {

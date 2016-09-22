@@ -10,6 +10,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -213,13 +215,33 @@ public class BaseTitleActivity extends FragmentActivity {
      */
     public void setStyle(STYLE style, int color) {
         setStyle(style);
+        setColor(color);
+    }
+
+    /**
+     * set the color of titleBar and statusBar
+     * @param color colorRes, not colorInt
+     */
+    public void setColor(@ColorRes int color) {
         if(mStatusView != null) {
             mStatusView.setBackgroundResource(color);
         }
         if(null != mTitleParent) {
             mTitleParent.setBackgroundResource(color);
         }
+    }
 
+    /**
+     * set the color of titleBar and statusBar
+     * @param color colorInt, not colorRes
+     */
+    public void setColorValue(@ColorInt int color) {
+        if(mStatusView != null) {
+            mStatusView.setBackgroundColor(color);
+        }
+        if(null != mTitleParent) {
+            mTitleParent.setBackgroundColor(color);
+        }
     }
 
     /**
