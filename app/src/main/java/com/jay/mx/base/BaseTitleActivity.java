@@ -113,11 +113,15 @@ public class BaseTitleActivity extends FragmentActivity {
         initViews();
 
         //设置透明状态栏
+        //实现沉浸式状态栏的关键
+        //这里可能需要添加一个判断，KITKAT以下的版本，没有透明状态栏，无法实现沉浸式状态栏
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.setFlags(
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else {
+            mStatusView.setVisibility(View.GONE);
         }
         setMiuiStatusBarDarkMode(this, false);
     }
@@ -284,7 +288,8 @@ public class BaseTitleActivity extends FragmentActivity {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) params;
 
         int titleHeight = this.getResources().getDimensionPixelSize(R.dimen.title_height);
-        layoutParams.topMargin = titleHeight + getStatusBarHeight();
+
+        layoutParams.topMargin = titleHeight + Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? getStatusBarHeight() : 0;
 
         if(mContentParent.getChildCount() > 1) {
             mContentParent.removeViewAt(1);
