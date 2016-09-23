@@ -2,12 +2,15 @@
     <string name="app_name">MX</string>
     <string name="my_app">MyApp</string>
     <string name="input_url">输入网址</string>
+    <string name="get">Get</string>
+    <string name="post">Post</string>
 
     <string-array name="function_1">
         <item>Change Animation</item>
         <item>Loading Dialog</item>
         <item>Full Screen Style</item>
         <item>TableLayout</item>
+        <item>OkHttpTest</item>
     </string-array>
 
 

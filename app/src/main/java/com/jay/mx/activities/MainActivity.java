@@ -1,8 +1,8 @@
-package com.jay.mx.activitys;
+package com.jay.mx.activities;
 
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,7 +16,6 @@ import com.jay.mx.R;
 import com.jay.mx.adapters.MyRecyclerAdapter;
 import com.jay.mx.base.BaseTitleActivity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -107,15 +106,19 @@ public class MainActivity extends BaseTitleActivity {
 
         //Java中都是按值传递，即传递的都是值的拷贝。
         //对于基本类型来说，很好理解，不管传进去的值如何变化，原先的值不会变，因为传递的是拷贝嘛。
-        //但是对于引用类型，就会有变化。对于引用类型来说，传递的拷贝其实这个变量的地址，所以效果上和C++中的按引用传递是一样的
+        //但是对于引用类型，就会有变化。对于引用类型来说，传递的拷贝其实是这个变量的地址，所以效果上和C++中的按引用传递是一样的
 
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, list);
         adapter.setOnItemClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+            String itemStr;
             @Override
             public void onItemClick(View view, int position) {
                 Log.i(TAG, list.get(position) + " clicked!");
                 //在这里添加Item 点击事件
-
+                itemStr = list.get(position);
+                if(itemStr.equals("OkHttpTest")) {
+                    startActivity(new Intent(MainActivity.this, OKHttpTestActivity.class));
+                }
             }
         });
         recyclerView.setAdapter(adapter);
