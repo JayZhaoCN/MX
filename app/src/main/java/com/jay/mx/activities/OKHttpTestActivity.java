@@ -1,6 +1,7 @@
 package com.jay.mx.activities;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +15,10 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Jay on 2016/9/23.
@@ -37,8 +41,12 @@ public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClic
     private void init() {
         TextView getText = (TextView) findViewById(R.id.get_text);
         TextView postText = (TextView) findViewById(R.id.post_text);
+        TextView uploadText = (TextView) findViewById(R.id.upload_text);
+        TextView downloadText = (TextView) findViewById(R.id.download_text);
         getText.setOnClickListener(this);
         postText.setOnClickListener(this);
+        uploadText.setOnClickListener(this);
+        downloadText.setOnClickListener(this);
     }
 
     @Override
@@ -78,6 +86,33 @@ public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClic
                     public void onResponse(Response response) throws IOException {
                         //do something when success
                         Log.i(TAG, "post success: " + response.body().string());
+                    }
+                });
+                break;
+            //上传文件
+            case R.id.upload_text:
+                break;
+            //下载文件
+            case R.id.download_text:
+                Log.i(TAG, "download file button clicked!");
+                Request request2 = new Request.Builder().url("http://i.imgur.com/NG7m01W.jpg").build();
+                okHttpClient.newCall(request2).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        Log.i(TAG, "download fail!");
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        InputStream inputStream = response.body().byteStream();
+                        FileOutputStream fileOutputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory().getPath() + "/demo.jpg"));
+                        byte[] bytes = new byte[1024];
+                        int len;
+                        while((len = inputStream.read(bytes)) != -1) {
+                            fileOutputStream.write(bytes, 0, len);
+                        }
+                        fileOutputStream.flush();
+                        Log.i(TAG, "download success!");
                     }
                 });
                 break;

@@ -4,6 +4,8 @@
     <string name="input_url">输入网址</string>
     <string name="get">Get</string>
     <string name="post">Post</string>
+    <string name="upload_file">Upload File</string>
+    <string name="download_file">Download File</string>
 
     <string-array name="function_1">
         <item>Change Animation</item>
