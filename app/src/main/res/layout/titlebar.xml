@@ -39,17 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:paddingStart="3dp"
-            android:hint="@string/input_url"
-            android:textSize="14sp"
-            android:background="@color/white_55_percent"
-            android:id="@+id/edit_text"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            android:layout_width="260dp"
-            android:layout_height="30dp" />
-
         <Button
             android:layout_marginEnd="5dp"
             android:layout_centerVertical="true"
@@ -59,15 +48,6 @@
             android:layout_height="28dp"
             android:id="@+id/right"/>
 
-        <Button
-            android:visibility="gone"
-            android:layout_marginEnd="5dp"
-            android:layout_centerVertical="true"
-            android:scaleType="centerInside"
-            android:layout_alignParentEnd="true"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:id="@+id/search_button"/>
     </RelativeLayout>
 
 </RelativeLayout>
