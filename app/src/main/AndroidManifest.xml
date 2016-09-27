@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".base.BaseTitleActivity"/>
         <activity android:name=".activities.OKHttpTestActivity"/>
+        <activity android:name=".activities.TestViewActivity"/>
     </application>
 
 </manifest>

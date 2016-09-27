@@ -118,6 +118,8 @@ public class MainActivity extends BaseTitleActivity {
                 itemStr = list.get(position);
                 if(itemStr.equals("OkHttpTest")) {
                     startActivity(new Intent(MainActivity.this, OKHttpTestActivity.class));
+                } else if(itemStr.equals("Test View")) {
+                    startActivity(new Intent(MainActivity.this, TestViewActivity.class));
                 }
             }
         });

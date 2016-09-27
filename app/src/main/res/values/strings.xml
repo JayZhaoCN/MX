@@ -8,7 +8,7 @@
     <string name="download_file">Download File</string>
 
     <string-array name="function_1">
-        <item>Change Animation</item>
+        <item>Test View</item>
         <item>Loading Dialog</item>
         <item>Full Screen Style</item>
         <item>TableLayout</item>
