@@ -47,4 +47,13 @@
         android:background="@drawable/button_background"
         />
 
+    <com.jay.mx.widgets.ColorfulImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <ImageView
+        android:background="@drawable/mm_title_btn_contact_normal"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
 </LinearLayout>
