@@ -20,8 +20,8 @@ import com.jay.mx.R;
 public class TestView extends View {
     private static final String TAG = "TestView";
     private Paint mPaint;
+    private Paint mTestPaint;
     private Context mContext;
-    private Rect mRect;
     private RectF mRectF;
 
     public TestView(Context context) {
@@ -45,7 +45,12 @@ public class TestView extends View {
         mPaint.setTextSize(40);
         mPaint.setTextAlign(Paint.Align.LEFT);  // 默认是Paint.Align.LEFT
 
-        mRect = new Rect(500, 500, 600, 600);
+        mTestPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTestPaint.setAntiAlias(true);
+        mTestPaint.setColor(ContextCompat.getColor(mContext, R.color.bg_color_red));
+        mTestPaint.setStyle(Paint.Style.STROKE);
+        mTestPaint.setStrokeWidth(10);
+
         mRectF = new RectF(500, 500, 700, 600);
     }
 
@@ -87,5 +92,12 @@ public class TestView extends View {
         //float sweepAngle:弧划过的角度，顺时针方向划过
         //boolean useCenter:是否画弧的两边，true表示画，false表示只画弧
         //Paint paint:画笔
+
+        //下面探索StrokeWidth和边界之间的关系
+        canvas.drawCircle(400, 400, 100, mTestPaint);
+        canvas.drawLine(500, 100, 500, 700, mPaint);
+        //结论：
+        //如果线或弧有宽度，是以线或弧的中心为基准，向两边分别扩散半个StrokeWidth宽度
+        //为了画图时不至于让边界遮挡部分内容，需要考虑到这一点并做相应处理。
     }
 }

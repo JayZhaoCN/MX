@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClickListener{
     private static final String TAG = "OKHttpTestActivity";
+    private String mUrl = "https://www.baidu.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClic
         switch (v.getId()) {
             //异步的get请求
             case R.id.get_text:
-                Request request = new Request.Builder().url("https://www.baidu.com").build();
+                Request request = new Request.Builder().url(mUrl).build();
 
                 Call call = okHttpClient.newCall(request);
                 call.enqueue(new Callback() {
@@ -91,6 +92,7 @@ public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClic
                 break;
             //上传文件
             case R.id.upload_text:
+                //暂时不写上传文件
                 break;
             //下载文件
             case R.id.download_text:
@@ -104,6 +106,7 @@ public class OKHttpTestActivity extends BaseTitleActivity implements View.OnClic
 
                     @Override
                     public void onResponse(Response response) throws IOException {
+                        //下面代码展示了如何使用OKHttp下载文件
                         InputStream inputStream = response.body().byteStream();
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory().getPath() + "/demo.jpg"));
                         byte[] bytes = new byte[1024];
