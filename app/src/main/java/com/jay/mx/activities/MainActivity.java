@@ -1,8 +1,12 @@
 package com.jay.mx.activities;
 
+import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -36,11 +40,11 @@ public class MainActivity extends BaseTitleActivity {
     private void initAnimator() {
         if(mColorAnimator == null) {
             //关于Color的动画，调用ValueAnimator.ofArgb(int ...values)
-            mColorAnimator = ValueAnimator.ofArgb
+            mColorAnimator = ValueAnimator.ofInt
                     (ContextCompat.getColor(this, R.color.bg_color_red),
                             ContextCompat.getColor(this, R.color.colorPrimary), ContextCompat.getColor(this, R.color.blue_light));
             //如果调用了ofArgb方法，就不用再去设置Evaluator了
-            //mColorAnimator.setEvaluator(new ArgbEvaluator());
+            mColorAnimator.setEvaluator(new ArgbEvaluator());
             mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 int currentColor;
                 @Override
@@ -117,6 +121,7 @@ public class MainActivity extends BaseTitleActivity {
                 //在这里添加Item 点击事件
                 itemStr = list.get(position);
                 if(itemStr.equals("OkHttpTest")) {
+                    //goToMarket(MainActivity.this, "com.tencent.mm");
                     startActivity(new Intent(MainActivity.this, OKHttpTestActivity.class));
                 } else if(itemStr.equals("Test View")) {
                     startActivity(new Intent(MainActivity.this, TestViewActivity.class));
@@ -125,5 +130,20 @@ public class MainActivity extends BaseTitleActivity {
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    /**
+     * 小米手机上该方法会默认跳转到小米应用商店
+     * @param context 上下文
+     * @param packageName 需要下载的应用包名
+     */
+    public static void goToMarket(Context context, String packageName) {
+        Uri uri = Uri.parse("market://details?id=" + packageName);
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            context.startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

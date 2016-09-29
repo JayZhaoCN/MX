@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Region;
+import android.graphics.RegionIterator;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -23,6 +25,7 @@ public class TestView extends View {
     private Paint mTestPaint;
     private Context mContext;
     private RectF mRectF;
+    private Region mRegion;
 
     public TestView(Context context) {
         this(context, null);
@@ -52,6 +55,8 @@ public class TestView extends View {
         mTestPaint.setStrokeWidth(10);
 
         mRectF = new RectF(500, 500, 700, 600);
+
+        mRegion = new Region(new Rect(500, 800, 700, 900));
     }
 
     @Override
@@ -99,5 +104,48 @@ public class TestView extends View {
         //结论：
         //如果线或弧有宽度，是以线或弧的中心为基准，向两边分别扩散半个StrokeWidth宽度
         //为了画图时不至于让边界遮挡部分内容，需要考虑到这一点并做相应处理。
+
+        //如何画Region（区域）
+        mPaint.setStyle(Paint.Style.FILL);
+        drawRegion(canvas, mRegion, mPaint);
+
+        Rect rect1 = new Rect(100, 600, 400, 700);
+        Rect rect2 = new Rect(200, 500, 300, 800);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+
+        //canvas.drawRect(rect1, paint);
+        //canvas.drawRect(rect2, paint);
+
+        Region region1 = new Region(rect1);
+        Region region2 = new Region(rect2);
+
+        Paint regionPaint = new Paint();
+        regionPaint.setStyle(Paint.Style.FILL);
+        regionPaint.setColor(Color.CYAN);
+
+        //region1.union(rect2);
+        region1.op(region2, Region.Op.REPLACE);
+        drawRegion(canvas, region1, regionPaint);
+        //关于Region:
+        //Region表示一个区域。有四个构造方法：
+        //public Region()  //创建一个空的区域
+        //public Region(Region region) //拷贝一个region的范围
+        //public Region(Rect r)  //创建一个矩形的区域
+        //public Region(int left, int top, int right, int bottom) //创建一个矩形的区域
+
+
+    }
+
+    public void drawRegion(Canvas canvas, Region region, Paint paint) {
+        RegionIterator regionIterator = new RegionIterator(region);
+        Rect r = new Rect();
+
+        while(regionIterator.next(r)) {
+            canvas.drawRect(r, paint);
+        }
     }
 }
