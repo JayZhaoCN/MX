@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
+
+    <!--不可用状态-->
+    <item android:state_enabled="false">
         <shape>
-            <solid android:color="@color/bg_color_red_dark"/>
-            <corners android:radius="14dp"/>
+            <solid android:color="@color/bg_color_grey"/>
+            <corners android:radius="12dp"/>
         </shape>
     </item>
 
-    <item>
+    <!--点击状态-->
+    <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/bg_color_red"/>
-            <corners android:radius="14dp"/>
+            <solid android:color="@color/bg_color_red_dark"/>
+            <corners android:radius="12dp"/>
         </shape>
     </item>
+
+    <!--正常状态-->
+    <item android:state_enabled="true">
+        <shape>
+            <solid android:color="@color/bg_color_red"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
 </selector>

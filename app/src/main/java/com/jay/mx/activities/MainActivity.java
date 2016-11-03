@@ -123,8 +123,10 @@ public class MainActivity extends BaseTitleActivity {
                 if(itemStr.equals("OkHttpTest")) {
                     //goToMarket(MainActivity.this, "com.tencent.mm");
                     startActivity(new Intent(MainActivity.this, OKHttpTestActivity.class));
-                } else if(itemStr.equals("Test View")) {
+                } else if(itemStr.equals("Test About Custom View")) {
                     startActivity(new Intent(MainActivity.this, TestViewActivity.class));
+                } else if(itemStr.equals("Test About AsyncTask")) {
+                    startActivity(new Intent(MainActivity.this, TestAsyncTaskActivity.class));
                 }
             }
         });

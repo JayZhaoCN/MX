@@ -6,10 +6,11 @@
     <string name="post">Post</string>
     <string name="upload_file">Upload File</string>
     <string name="download_file">Download File</string>
+    <string name="start">Start</string>
 
     <string-array name="function_1">
-        <item>Test View</item>
-        <item>Loading Dialog</item>
+        <item>Test About Custom View</item>
+        <item>Test About AsyncTask</item>
         <item>Full Screen Style</item>
         <item>TableLayout</item>
         <item>OkHttpTest</item>
