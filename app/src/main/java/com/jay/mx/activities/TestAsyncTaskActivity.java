@@ -35,7 +35,7 @@ public class TestAsyncTaskActivity extends BaseTitleActivity {
             @Override
             public void onClick(View view) {
                 mStartBtn.setEnabled(false);
-                new MyAsyncTask().execute(85);
+                new MyAsyncTask().execute(25);
             }
         });
     }
