@@ -1,13 +1,17 @@
 package com.jay.mx.activities;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jay.mx.R;
 import com.jay.mx.base.BaseTitleActivity;
+import com.jay.mx.widgets.CustomProgressBar;
 
 /**
  * Created by Jay on 2016/11/3.
@@ -17,6 +21,8 @@ import com.jay.mx.base.BaseTitleActivity;
 public class TestAsyncTaskActivity extends BaseTitleActivity {
     private Button mStartBtn;
     private ProgressBar mProgressBar;
+    private CustomProgressBar mCustomProgressBar;
+    private TextView mProgressText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,17 @@ public class TestAsyncTaskActivity extends BaseTitleActivity {
             public void onClick(View view) {
                 mStartBtn.setEnabled(false);
                 new MyAsyncTask().execute(25);
+            }
+        });
+
+        mCustomProgressBar = (CustomProgressBar) findViewById(R.id.custom_progressbar);
+        mCustomProgressBar.setProgress(170);
+
+        mProgressText = (TextView) findViewById(R.id.progress_text);
+        mCustomProgressBar.setOnProgressChangeListener(new CustomProgressBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChange(int progress) {
+                mProgressText.setText(String.valueOf(progress));
             }
         });
     }

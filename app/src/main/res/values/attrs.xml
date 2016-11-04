@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomProgressBar">
+        <attr name="progress_height"  format="dimension"/>
+        <attr name="seek_radius"  format="dimension"/>
+        <attr name="type"  format="integer"/>
+        <attr name="max_progress"  format="integer"/>
+        <attr name="min_progress"  format="integer"/>
+        <attr name="seek_color_changeable"  format="boolean"/>
+        <attr name="style"  format="integer"/>
+        <attr name="seek_color"  format="color"/>
+        <attr name="single_progress_color"  format="color"/>
+        <attr name="gradual_start_color"  format="color"/>
+        <attr name="gradual_end_color"  format="color"/>
+    </declare-styleable>
+</resources>
