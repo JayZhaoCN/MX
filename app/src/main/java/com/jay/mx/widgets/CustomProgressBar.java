@@ -10,6 +10,7 @@ import android.graphics.Shader;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +27,6 @@ public class CustomProgressBar extends View {
     private float mHeight;
     private float mWidth;
     private float mPerLength;
-    private float mIndex;
     //the current location of seek circle center
     private float mSeekLocation;
 
@@ -64,7 +64,8 @@ public class CustomProgressBar extends View {
     //default style: STYLE_MULTI_COLOR
     private int mStyle = STYLE_MULTI_COLOR;
 
-    private boolean isSeekColorChangeable = true;
+    //这个属性默认是false，当该属性设置为true，seek_color属性将不起作用，因为seekColor是随着progressbar渐变的，无法为其指定固定的颜色
+    private boolean isSeekColorChangeable = false;
 
     //default min progress
     private int mMinProgress = 80;
@@ -75,21 +76,30 @@ public class CustomProgressBar extends View {
 
     private int mSeekColor;
 
-    @ColorInt private int mSingleProgressColor;
+    private int mSingleProgressColor;
 
     private int mStartColor;
     private int mEndColor;
 
+    private int mTransparentColor;
+
     LinearGradient mGradient;
 
     public void setProgress(int progress) {
-        mProgress = progress;
+        //这里要加一个判断，如果设置的progress大于max_progress，则将progress设置为max_progress
+        if(progress > mMaxProgress) {
+            mProgress = mMaxProgress;
+            Log.i(TAG, "progress is bigger than max_progress, so set progress as max_progress.");
+        } else if(progress < mMinProgress) {
+            mProgress = mMinProgress;
+            Log.i(TAG, "progress is smaller than min_progress, so set progress as min_progress.");
+        } else  mProgress = progress;
         mSeekLocation = (mProgress - mMinProgress) * mWidth / (mMaxProgress - mMinProgress) + mSeekRadius;
         postInvalidate();
     }
 
     public int getProgress() {
-       return mProgress;
+        return mProgress;
     }
 
     public void setType(int type) {
@@ -112,7 +122,7 @@ public class CustomProgressBar extends View {
         isSeekColorChangeable = changeable;
     }
 
-    public boolean getSeekColorChangeable() {
+    public boolean isSeekColorChangeable() {
         return isSeekColorChangeable;
     }
 
@@ -128,7 +138,7 @@ public class CustomProgressBar extends View {
         mSeekColor = color;
     }
 
-    public @ColorInt int getSeekColor() {
+    public int getSeekColor() {
         return mSeekColor;
     }
 
@@ -136,11 +146,11 @@ public class CustomProgressBar extends View {
         mSingleProgressColor = color;
     }
 
-    public @ColorInt int getSingleProgressColor() {
+    public int getSingleProgressColor() {
         return mSingleProgressColor;
     }
 
-    public void setStartColor(int color) {
+    public void setStartColor(@ColorInt int color) {
         mStartColor = color;
     }
 
@@ -148,7 +158,7 @@ public class CustomProgressBar extends View {
         return mStartColor;
     }
 
-    public void setEndColor(int color) {
+    public void setEndColor(@ColorInt int color) {
         mEndColor = color;
     }
 
@@ -156,6 +166,13 @@ public class CustomProgressBar extends View {
         return mEndColor;
     }
 
+    public int getTransparentColor() {
+        return mTransparentColor;
+    }
+
+    public void setTransparentColor(@ColorInt int color) {
+        mTransparentColor = color;
+    }
 
     private OnProgressChangeListener mListener;
 
@@ -177,21 +194,27 @@ public class CustomProgressBar extends View {
 
     public void setColors(@ColorInt int[] colors) {
         mColors = colors;
+        mCount = mColors.length;
     }
 
     private void obtainStyledAttr(AttributeSet attrs, int defStyleAttr) {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.CustomProgressBar, 0, defStyleAttr);
         mProgressHeight = ta.getDimensionPixelOffset(R.styleable.CustomProgressBar_progress_height, (int) dp2px(mContext, 10f));
         mSeekRadius = ta.getDimensionPixelOffset(R.styleable.CustomProgressBar_seek_radius, (int) dp2px(mContext, 9f));
-        mType = ta.getInt(R.styleable.CustomProgressBar_type, TYPE_MOVABLE);
-        mMaxProgress = ta.getInt(R.styleable.CustomProgressBar_max_progress, TYPE_MOVABLE);
-        mMinProgress = ta.getInt(R.styleable.CustomProgressBar_min_progress, TYPE_MOVABLE);
-        isSeekColorChangeable = ta.getBoolean(R.styleable.CustomProgressBar_seek_color_changeable, true);
+        setType(ta.getInt(R.styleable.CustomProgressBar_type, TYPE_MOVABLE));
+        setMaxProgress(ta.getInt(R.styleable.CustomProgressBar_max_progress, 100));
+        setMinProgress(ta.getInt(R.styleable.CustomProgressBar_min_progress, 0));
+        if(mMinProgress >= mMaxProgress) {
+            throw new IllegalArgumentException("minProgress must be less than maxProgress, please check your input!");
+        }
+        setProgress(ta.getInt(R.styleable.CustomProgressBar_progress, mMinProgress));
+        setSeekColorChangeable(ta.getBoolean(R.styleable.CustomProgressBar_seek_color_changeable, false));
         mStyle = ta.getInt(R.styleable.CustomProgressBar_style, STYLE_MULTI_COLOR);
-        mSeekColor = ta.getColor(R.styleable.CustomProgressBar_seek_color, Color.rgb(206, 115, 6));
-        mSingleProgressColor = ta.getColor(R.styleable.CustomProgressBar_single_progress_color, Color.rgb(206, 115, 6));
-        mStartColor = ta.getColor(R.styleable.CustomProgressBar_gradual_start_color, Color.rgb(214, 197, 114));
-        mEndColor = ta.getColor(R.styleable.CustomProgressBar_gradual_end_color, Color.rgb(255, 41, 25));
+        setSeekColor(ta.getColor(R.styleable.CustomProgressBar_seek_color, Color.rgb(206, 115, 6)));
+        setSingleProgressColor(ta.getColor(R.styleable.CustomProgressBar_single_progress_color, Color.rgb(206, 115, 6)));
+        setStartColor(ta.getColor(R.styleable.CustomProgressBar_gradual_start_color, Color.rgb(214, 197, 114)));
+        setEndColor(ta.getColor(R.styleable.CustomProgressBar_gradual_end_color, Color.rgb(255, 41, 25)));
+        setTransparentColor(ta.getColor(R.styleable.CustomProgressBar_transparent_color, Color.WHITE));
         ta.recycle();
     }
 
@@ -211,7 +234,7 @@ public class CustomProgressBar extends View {
         mSeekPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mSeekPaint.setColor(mSeekColor);
         mTransparentPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTransparentPaint.setColor(Color.WHITE);
+        mTransparentPaint.setColor(mTransparentColor);
 
         mDefaultHeight = dp2px(mContext, 18f);
         mDefaultWidth = dp2px(mContext, 300f);
@@ -219,6 +242,7 @@ public class CustomProgressBar extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.i(TAG, "onMeasure");
         float desireHeight = mDefaultHeight + getPaddingStart() + getPaddingEnd();
         float desireWidth = mDefaultWidth + getPaddingTop() + getPaddingBottom();
 
@@ -260,7 +284,7 @@ public class CustomProgressBar extends View {
     }
 
     private void drawGradualColorProgressBar(Canvas canvas) {
-        mGradient = new LinearGradient(0, 0, mWidth + mSeekRadius * 2, 0, new int[] {mStartColor,mEndColor}, null, Shader.TileMode.REPEAT);
+        mGradient = new LinearGradient(-2, 0, mWidth + mSeekRadius * 2 + 2, 0, new int[] {mStartColor,mEndColor}, null, Shader.TileMode.REPEAT);
         mBgPaint.setShader(mGradient);
         if(isSeekColorChangeable) mSeekPaint.setShader(mGradient);
         canvas.drawCircle(mHeight / 2 - mProgressTop + mSeekRadius, mHeight / 2, mHeight / 2 - mProgressTop, mBgPaint);
@@ -281,7 +305,7 @@ public class CustomProgressBar extends View {
 
     private void drawMultiColorProgressBar(Canvas canvas) {
         for(int i=0; i<mCount; i++) {
-            mIndex = mPerLength * i;
+            float mIndex = mPerLength * i;
             mBgPaint.setColor(mColors[i]);
             if(i == 0) {
                 canvas.drawCircle(mHeight / 2 - mProgressTop + mSeekRadius, mHeight / 2, mHeight / 2 - mProgressTop, mBgPaint);
@@ -302,6 +326,7 @@ public class CustomProgressBar extends View {
     private void drawSeek(Canvas canvas) {
         if(isSeekColorChangeable && mStyle == STYLE_MULTI_COLOR) setSeekPaintColor();
 
+        mTransparentPaint.setColor(mTransparentColor);
         if(mSeekLocation <= mSeekRadius) {
             canvas.drawCircle(mSeekRadius, mHeight / 2, mSeekRadius + 1, mTransparentPaint);
             canvas.drawCircle(mSeekRadius, mHeight / 2, mSeekRadius, mSeekPaint);
@@ -316,7 +341,7 @@ public class CustomProgressBar extends View {
 
     private void setSeekPaintColor() {
         int section = (int) ((mSeekLocation - mSeekRadius) / mPerLength);
-        if(section >= 4) section = 4;
+        if(section >= mCount - 1) section = mCount - 1;
         mSeekPaint.setColor(mColors[section]);
     }
 
@@ -328,6 +353,8 @@ public class CustomProgressBar extends View {
                 mListener.onProgressChange(calculateProgress());
             }
             postInvalidate();
+        } else if(mType == TYPE_UNMOVABLE) {
+            Log.i(TAG, "type is TYPE_UNMOVABLE, so can not move!");
         }
         return true;
     }

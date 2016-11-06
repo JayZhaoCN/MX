@@ -3,6 +3,7 @@ package com.jay.mx.activities;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.jay.mx.widgets.CustomProgressBar;
  */
 
 public class TestAsyncTaskActivity extends BaseTitleActivity {
+    private static final String TAG = "TestAsyncTaskActivity";
+
     private Button mStartBtn;
     private ProgressBar mProgressBar;
     private CustomProgressBar mCustomProgressBar;
@@ -46,13 +49,33 @@ public class TestAsyncTaskActivity extends BaseTitleActivity {
         });
 
         mCustomProgressBar = (CustomProgressBar) findViewById(R.id.custom_progressbar);
-        mCustomProgressBar.setProgress(170);
+        //mCustomProgressBar.setProgress(170);
+
+        /*
+        mCustomProgressBar.setStartColor(ContextCompat.getColor(this, R.color.bg_color_white));
+        mCustomProgressBar.setEndColor(ContextCompat.getColor(this, R.color.bg_mode_sleep));
+        mCustomProgressBar.setSingleProgressColor(ContextCompat.getColor(this, R.color.bg_mode_sleep));
+        mCustomProgressBar.setSeekColorChangeable(true);
+        mCustomProgressBar.setType(CustomProgressBar.TYPE_MOVABLE);
+        */
+        //mCustomProgressBar.setMaxProgress(100);
+
+        mCustomProgressBar.setTransparentColor(Color.WHITE);
+
+
+        mCustomProgressBar.setColors(new int[] {
+                Color.rgb(214, 197, 114),
+                Color.rgb(214, 184, 21),
+                Color.rgb(229, 146, 23),
+                Color.rgb(242, 89, 24)
+        });
 
         mProgressText = (TextView) findViewById(R.id.progress_text);
         mCustomProgressBar.setOnProgressChangeListener(new CustomProgressBar.OnProgressChangeListener() {
             @Override
             public void onProgressChange(int progress) {
                 mProgressText.setText(String.valueOf(progress));
+                Log.i(TAG, "progress: " + mCustomProgressBar.getProgress());
             }
         });
     }
