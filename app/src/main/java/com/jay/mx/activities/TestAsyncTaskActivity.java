@@ -58,16 +58,30 @@ public class TestAsyncTaskActivity extends BaseTitleActivity {
         mCustomProgressBar.setSeekColorChangeable(true);
         mCustomProgressBar.setType(CustomProgressBar.TYPE_MOVABLE);
         */
-        //mCustomProgressBar.setMaxProgress(100);
+        mCustomProgressBar.setMaxProgress(180);
+        mCustomProgressBar.setMinProgress(10);
+        mCustomProgressBar.setProgress(100);
 
         mCustomProgressBar.setTransparentColor(Color.WHITE);
+        mCustomProgressBar.setTransparentColor(Color.WHITE);
+        /*
+        mCustomProgressBar.setStyle(CustomProgressBar.STYLE_GRADUAL_COLOR);
+        mCustomProgressBar.setStartColor(ContextCompat.getColor(this, R.color.personinfo_color_yellow));
+        mCustomProgressBar.setEndColor(ContextCompat.getColor(this, R.color.bg_color_red_dark));
+        /*
+        /*
+        mCustomProgressBar.setStyle(CustomProgressBar.STYLE_SINGLE_COLOR);
+        mCustomProgressBar.setStyle(CustomProgressBar.STYLE_SINGLE_COLOR);
+        mCustomProgressBar.setSeekColor(ContextCompat.getColor(this, R.color.bg_color_steps));
+        mCustomProgressBar.setSingleProgressColor(ContextCompat.getColor(this, R.color.bg_color_steps));
+        */
 
-
-        mCustomProgressBar.setColors(new int[] {
-                Color.rgb(214, 197, 114),
-                Color.rgb(214, 184, 21),
-                Color.rgb(229, 146, 23),
-                Color.rgb(242, 89, 24)
+       mCustomProgressBar.setColors(new int[] {
+                ContextCompat.getColor(this, R.color.bg_mode_sleep),
+                ContextCompat.getColor(this, R.color.bg_color_blue_dark),
+                ContextCompat.getColor(this, R.color.blue_light),
+                ContextCompat.getColor(this, R.color.bg_color_steps),
+                ContextCompat.getColor(this, R.color.sleep_bg)
         });
 
         mProgressText = (TextView) findViewById(R.id.progress_text);

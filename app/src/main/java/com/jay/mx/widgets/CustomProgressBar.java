@@ -243,12 +243,17 @@ public class CustomProgressBar extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         Log.i(TAG, "onMeasure");
+
         float desireHeight = mDefaultHeight + getPaddingStart() + getPaddingEnd();
         float desireWidth = mDefaultWidth + getPaddingTop() + getPaddingBottom();
 
+        Log.i(TAG, "paddingStart: " + getPaddingStart());
+        Log.i(TAG, "paddingEnd: " + getPaddingEnd());
+
         mHeight = View.resolveSize((int) desireHeight, heightMeasureSpec);
         mWidth = View.resolveSize((int) desireWidth, widthMeasureSpec);
-
+        Log.i(TAG, "mHeight: " + mHeight);
+        Log.i(TAG, "mWidth: " + mWidth);
 
         mPerLength = mWidth / mCount;
         mProgressTop = (mHeight - mProgressHeight) / 2;

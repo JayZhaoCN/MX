@@ -20,18 +20,20 @@
     <com.jay.mx.widgets.CustomProgressBar
         android:id="@+id/custom_progressbar"
         app:progress_height="10dp"
-        app:seek_radius="9dp"
+        app:seek_radius="14dp"
         app:type="movable"
         app:style="multi_color"
+        app:single_progress_color="@color/sleep_bg"
         app:max_progress="180"
         app:min_progress="10"
         app:progress="190"
+        android:padding="80dp"
+        app:gradual_start_color="@color/personinfo_color_yellow"
+        app:gradual_end_color="@color/bg_color_red_dark"
         app:transparent_color="@color/bg_color_red"
-        app:seek_color="@color/bg_color_blue_dark"
+        app:seek_color="@color/bg_color_steps"
         app:seek_color_changeable="true"
-        android:layout_marginStart="20dp"
-        android:padding="20dp"
-        android:layout_width="300dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content" />
 
     <TextView
